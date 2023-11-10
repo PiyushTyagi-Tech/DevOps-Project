@@ -18,7 +18,7 @@ jobs:
         run: docker push piyush8085/nodejs-app:latest
   deploy:
     needs: build
-    runs-on: [dev-ec2]
+    runs-on: [self-hosted]
     steps:
       - name: Pull image from docker hub
         run: docker pull piyush8085/nodejs-app:latest
