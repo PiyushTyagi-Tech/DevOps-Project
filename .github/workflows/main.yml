@@ -16,3 +16,13 @@ jobs:
         run: docker build -t piyush8085/nodejs-app .
       - name: Publish image to docker hub
         run: docker push piyush8085/nodejs-app:latest
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull piyushtyagi8085/nodejs-app:latest
+      - name: Delete old container
+        run: docker rm -f nodejs-app-container
+      - name: Run docker container
+        run: docker run -d -p 5000:5000 --name nodejs-app-container piyushtyago8085/nodejs-app
