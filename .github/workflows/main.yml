@@ -24,7 +24,7 @@ jobs:
       - name: Build docker image
         run: docker build -t piyush8085/nodejs-app .
       - name: Publish image to docker hub
-        run: docker push piyush8085/nodejs-app:latest
+        run: docker push piyush8085/nodejs-app:${{github.ref}}
   deploy:
     needs: build
     runs-on: [self-hosted]
