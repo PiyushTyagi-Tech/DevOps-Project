@@ -13,8 +13,9 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Set Tag Variable
-        run: echo "TAG_NAME=${{ github.ref }}" >> $GITHUB_ENV
+      - name: Set commit tag
+        id: set_tag
+        run: echo "COMMIT_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Display Tag Variable
         run: echo "Tag Name is $TAG_NAME"
@@ -22,9 +23,9 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
       - name: Build docker image
-        run: docker build -t piyush8085/nodejs-app .
+        run: docker build -t piyush8085/nodejs-app:COMMIT_TAG .
       - name: Publish image to docker hub
-        run: docker push piyush8085/nodejs-app:${{github.ref}}
+        run: docker push piyush8085/nodejs-app:$COMMIT_TAG
   deploy:
     needs: build
     runs-on: [self-hosted]
