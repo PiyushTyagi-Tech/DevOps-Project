@@ -31,7 +31,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: prod-task-definition.json 
+          task-definition: prod-task-defination.json 
           container-name: Web-Server
           image:  piyush8085/nodejs-app:${{github.sha}}
 
