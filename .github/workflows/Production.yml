@@ -7,7 +7,7 @@ on:
         - completed
 
 jobs:
-  build-and-deploy:
+  prod-deploy:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout source
@@ -26,6 +26,8 @@ jobs:
         with:
           mask-password: 'true'
           
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
         
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
