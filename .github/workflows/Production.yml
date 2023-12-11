@@ -49,7 +49,7 @@ jobs:
         with:
           task-definition: prod-task-defination.json 
           container-name: Web-Server
-          image:  piyush8085/nodejs-app:${{github.sha}}
+          image:  ${{ steps.build-image.outputs.image }}
 
 
       - name: Deploy Amazon ECS task definition
