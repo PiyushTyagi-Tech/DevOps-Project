@@ -12,6 +12,7 @@ jobs:
         run: echo "$PATH"
   
   build:
+    needs: static-code-analysis
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout source

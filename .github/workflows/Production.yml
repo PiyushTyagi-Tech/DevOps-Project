@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Testing the server
         run: cd /home/ubuntu/actions-runner/actions-runner && ./test.sh
+
+
    prod-login:
+    needs: Devlopment-test
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout source
