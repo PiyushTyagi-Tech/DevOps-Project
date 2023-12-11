@@ -7,7 +7,12 @@ on:
         - completed
 
 jobs:
-  prod-login:
+   Devlopment-test:
+    runs-on: [self-hosted]
+    steps:
+      - name: Testing the server
+        run: cd /home/ubuntu/actions-runner/actions-runner && ./test.sh
+   prod-login:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout source
@@ -28,7 +33,7 @@ jobs:
 
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
-  deploy:
+   deploy:
     needs: prod-login
     runs-on: [prod-server]
     steps:
