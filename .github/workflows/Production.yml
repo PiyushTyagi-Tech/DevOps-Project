@@ -30,7 +30,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
   deploy:
     needs: prod-login
-    runs-on: [self-hosted]
+    runs-on: [prod-server]
     steps:
       - name: Pull image from docker hub
         run: sudo docker pull piyush8085/nodejs-app:${{ github.sha }}
