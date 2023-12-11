@@ -15,19 +15,21 @@ jobs:
       
       - name: Building image tag
         run: |
-         IMAGE_NAME="your-docker-repo/your-image"
          TAG="commit-${{ github.sha}}"
 
       - name: Viewing commit TAG
-        run: echo $TAG
+        run: echo "$TAG"
+
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
 
       - name: Build docker image
-        run: docker build -t piyush8085/nodejs-app:$TAG .
+        run: docker build -t piyush8085/nodejs-app:${{ github.sha }} .
 
       - name: Publish image to docker hub
-        run: docker push piyush8085/nodejs-app:$COMMIT_TAG
+        run: docker push piyush8085/nodejs-app:${{ github.sha}}
+
+
   deploy:
     needs: build
     runs-on: [self-hosted]
