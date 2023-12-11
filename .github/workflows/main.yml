@@ -12,19 +12,19 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+      
+      - name: Building image tag
+        run: |
+         IMAGE_NAME="your-docker-repo/your-image"
+         TAG="commit-${{ github.sha}}"
 
-      - name: Set commit tag
-        id: set_tag
-        run: echo "COMMIT_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Display Tag Variable
-        run: echo "Tag Name is $COMMIT_TAG"
-
+      - name: Viewing commit TAG
+        run: echo $TAG
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }} 
 
       - name: Build docker image
-        run: docker build -t piyush8085/nodejs-app:$COMMIT_TAG .
+        run: docker build -t piyush8085/nodejs-app:$TAG .
 
       - name: Publish image to docker hub
         run: docker push piyush8085/nodejs-app:$COMMIT_TAG
