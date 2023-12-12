@@ -8,17 +8,8 @@ jobs:
   static-code-analysis:
     runs-on: [ubuntu-latest]
     steps:
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'docker.io/piyush8085/nodejs-app:${{ github.sha }}'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
+     - name: Testing
+       run: echo "$PATH"
   
   build:
     needs: static-code-analysis
@@ -40,6 +31,17 @@ jobs:
       - name: Build docker image
         run: docker build -t piyush8085/nodejs-app:${{ github.sha }} .
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/piyush8085/nodejs-app:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
       - name: Publish image to docker hub
         run: docker push piyush8085/nodejs-app:${{ github.sha}}
 
