@@ -1,15 +1,15 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:628112277173:task-definition/prod-task-defination:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:628112277173:task-definition/prod-task-defination:8",
     "containerDefinitions": [
         {
             "name": "Web-Server",
-            "image": "628112277173.dkr.ecr.us-east-2.amazonaws.com/nodejs-app",
+            "image": "public.ecr.aws/l8k9f4e5/nodejs-app:latest",
             "cpu": 0,
             "portMappings": [
                 {
                     "name": "5000",
-                    "containerPort": 5000,
-                    "hostPort": 5000,
+                    "containerPort": 8001,
+                    "hostPort": 8001,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
@@ -33,9 +33,10 @@
         }
     ],
     "family": "prod-task-defination",
+    "taskRoleArn": "arn:aws:iam::628112277173:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::628112277173:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 8,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -46,13 +47,10 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
         },
         {
-            "name": "ecs.capability.execution-role-ecr-pull"
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -78,7 +76,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-12-11T19:45:06.846Z",
+    "registeredAt": "2023-12-12T19:33:44.815Z",
     "registeredBy": "arn:aws:iam::628112277173:root",
     "tags": []
 }
