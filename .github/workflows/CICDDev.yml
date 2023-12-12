@@ -13,6 +13,10 @@ jobs:
   
   build:
     needs: static-code-analysis
+    permissions:
+      contents: read 
+      security-events: write 
+      actions: read
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout source
