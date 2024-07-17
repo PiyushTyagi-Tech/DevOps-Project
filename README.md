@@ -1,2 +1,3 @@
-# DevOps-Project
-This is the Test repo for building and deploying DevOps Project
+# Overview
+This Repo helps in creating the It includes configurations and scripts necessary for continuous integration, continuous deployment, and automation.
+
